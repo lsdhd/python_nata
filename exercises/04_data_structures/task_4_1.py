@@ -16,3 +16,10 @@
 """
 
 nat = "ip nat inside source list ACL interface FastEthernet0/1 overload"
+
+
+
+print ("\nЗадание 4.1:\n") 
+nat = "ip nat inside source list ACL FastEthernet0/1 overload" 
+stdout = nat.replace('Fast', "Gigabit") 
+print (stdout)
