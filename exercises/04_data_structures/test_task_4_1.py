@@ -1,9 +1,5 @@
 import pytest
 
-print ("\nЗадание 4.1:\n") 
-nat = "ip nat inside source list ACL FastEthernet0/1 overload" 
-stdout = nat.replace('Fast', "Gigabit") 
-print (stdout)
 
 
 # Проверка что тест вызван через pytest ..., а не python ...

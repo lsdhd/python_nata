@@ -22,3 +22,9 @@
 """
 
 config = "switchport trunk allowed vlan 1,3,10,20,30,100"
+commands = list(config.split()) 
+print  ('\nПревращаем строку в список:\n' +str(commands)) 
+print ('Берем последний элемент:\n' + str(commands[4])) 
+vlans = list(commands[4].split(',')) 
+stdout = str(vlans) 
+print ('Превращаем в список и выводим:\n' + stdout)

@@ -22,3 +22,11 @@
 
 command1 = "switchport trunk allowed vlan 1,2,3,5,8"
 command2 = "switchport trunk allowed vlan 1,3,8,9"
+
+vlans1= list(command1.split())[4] #вытаскиваем номера вланов в виде списка
+vlans2= list(command2.split())[4]
+spisok1 = set(list(vlans1.split(','))) #превращаем их в множества 
+spisok2 = set(list(vlans2.split(',')))  
+result = spisok1.intersection(spisok2) #выносим в переменную пересечение множеств 
+stdout = sorted(result) 
+print (stdout)
