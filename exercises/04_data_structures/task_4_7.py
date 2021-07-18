@@ -15,4 +15,15 @@
 проверять результат.
 """
 
+
+print ('\nЗадание 4.7\n')
+
 mac = "AAAA:BBBB:CCCC"
+geg = mac.split(':') #делим строку по двоеточию
+
+oktet1 = bin(int(geg[0], 16))  #переводим в двочную систему
+oktet2 = bin(int(geg[1], 16))
+oktet3 = bin(int(geg[2], 16))
+
+stdout = (oktet1.strip('0b') + oktet2.strip('0b') + oktet3.strip('0b')) #сохраняем результат, убирая из строк '0b'
+print (stdout)
