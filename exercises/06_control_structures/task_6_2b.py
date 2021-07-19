@@ -17,10 +17,16 @@ print('\nЗадание 6.2b\n')
 
 while True:
     ip = input("Введите адрес:").split('.')
-    good_ip = len(ip) ==4
+    good_ip = len(ip)
 
-    for i in ip:
-        good_ip = i.isdigit() and int(i) >=0 and int(i) <= 255
+
+    if good_ip == 4:
+        for octet in ip:
+            if not  ((octet.isdigit()) and int(octet) in range(256)):
+                good_ip = False
+                break
+    else:
+        good_ip = False
     if good_ip:
         break
     print('Неправильный ip адрес.')
@@ -35,3 +41,5 @@ elif int(ip[0]) == 0 and int(ip[1]) == 0 and int(ip[2]) == 0 and int(ip[3]) == 0
     print('unassigned')
 else:
     print('unused')
+
+
