@@ -50,16 +50,29 @@ switchport mode trunk
 switchport trunk allowed vlan 2,3,4,5
 """
 
+print('\nЗадание 5.3\n')
+
+mode = input('Введите режим работы интерфейса (access, trunk):')
+interface = input('Введите тип и номер интерфейса:')
+
 access_template = [
-    "switchport mode access",
-    "switchport access vlan {}",
-    "switchport nonegotiate",
-    "spanning-tree portfast",
-    "spanning-tree bpduguard enable",
+     "switchport mode access", "switchport access vlan {0}",
+    "switchport nonegotiate", "spanning-tree portfast",
+    "spanning-tree bpduguard enable", "Введите номер VLAN: "
 ]
 
 trunk_template = [
-    "switchport trunk encapsulation dot1q",
-    "switchport mode trunk",
-    "switchport trunk allowed vlan {}",
+    "switchport trunk encapsulation dot1q", "switchport mode trunk",
+    "switchport trunk allowed vlan {0}",'','', 'Введите разрешенные VLANы: '
 ]
+
+tag = {
+    'trunk': trunk_template,
+    'access': access_template
+    }
+
+vlan = input(tag[mode][5])
+
+print ('\n', '-' * 30)
+print(' Interface ', interface)
+print ('\n',tag[mode][0],'\n',tag[mode][1].format(str(vlan)),'\n',tag[mode][2].format(str(vlan)),'\n',tag[mode][3],'\n',tag[mode][4])
