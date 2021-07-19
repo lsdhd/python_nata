@@ -25,14 +25,14 @@ london_co = {
         "vendor": "Cisco",
         "model": "4451",
         "ios": "15.4",
-        "ip": "10.255.0.1",
+        "ip": "10.255.0.1"
     },
     "r2": {
         "location": "21 New Globe Walk",
         "vendor": "Cisco",
         "model": "4451",
         "ios": "15.4",
-        "ip": "10.255.0.2",
+        "ip": "10.255.0.2"
     },
     "sw1": {
         "location": "21 New Globe Walk",
@@ -41,6 +41,12 @@ london_co = {
         "ios": "3.6.XE",
         "ip": "10.255.0.101",
         "vlans": "10,20,30",
-        "routing": True,
-    },
+        "routing": True
+    }
 }
+
+device = input('Введите имя устройства (' + str(','.join(list(london_co.keys()))) + '):')
+chto_nuzhno = input('Введите имя параметра (' + str(','.join(list(london_co[device].keys())) +'):'))
+stdout = (london_co[device].get(chto_nuzhno.lower(), "Такого параметра нет"))
+print (stdout)
+
