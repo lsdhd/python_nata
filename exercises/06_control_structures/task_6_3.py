@@ -81,3 +81,47 @@ trunk = {
 #             print(f" {command} {vlan}")
 #         else:
 #             print(f" {command}")
+
+
+access_template = [
+    "switchport mode access",
+    "switchport access vlan",
+    "spanning-tree portfast",
+    "spanning-tree bpduguard enable",
+]
+
+trunk_template = [
+    "switchport trunk encapsulation dot1q",
+    "switchport mode trunk",
+    "switchport trunk allowed vlan",
+    "exit",
+]
+
+access = {"0/12": "10", "0/14": "11", "0/16": "17", "0/17": "150"}
+trunk = {"0/1": ["add", "10", "20"], "0/2": ["only", "11", "30"], "0/4": ["del", "17"]}
+
+'''for intf, vlan in access.items():    #intf-ключ, vlan-значение в словарях
+    print("interface FastEthernet" + intf)
+    for command in access_template:
+        if command.endswith("access vlan"): #если элемент списка кончается на 'access vlan'
+            print(f" {command} {vlan}") #добавляем в элемент номер влана
+        else:
+            print(f" {command}") #оставляем, как есть'''
+
+
+
+for intf, vlan in trunk.items():
+    print('\ninterface FastEthernet' + intf)
+    for command in trunk_template:
+        if command.endswith('allowed vlan'):  # если command кончается на allowed vlan
+            if vlan[0] == 'add':
+                vlan.pop(0)
+                print(f"{command} add {','.join(vlan)} ")
+            if vlan[0] == 'only':
+                vlan.pop(0)
+                print(f"{command} {','.join(vlan)}")
+            if vlan[0] == 'del':
+                vlan.pop(0)
+                print(f"{command} remove {','.join(vlan)}")
+        else:
+                print(f"{command}")
