@@ -14,3 +14,25 @@ Outbound Interface    FastEthernet0/0
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+
+file = open('ospf.txt', 'r').readlines()
+
+for ospf_route in file:
+
+    gogo = ospf_route.split(',')
+    gaga = gogo[0].split()
+
+    Router = {
+        'Prefix': gaga[1],
+        'AD/Metric': gaga[2],
+        'Next-Hop': gaga[4],
+        'Last update': gogo[1].strip(),
+        'Outbound Interface': gogo[2].strip()
+    }
+    print ("{:30}{:30}".format("Prefix:", str(Router['Prefix'])))
+    print ("{:30}{:30}".format("AD/Metric:", str(Router['AD/Metric'])))
+    print ("{:30}{:30}".format("Next-Hop:", str(Router['Next-Hop'])))
+    print ("{:30}{:30}".format("Last update:", str(Router["Last update"])))
+    print ("{:30}{:30}".format("Outbound Interface:", str(Router["Outbound Interface"])))
+    print('\n')
