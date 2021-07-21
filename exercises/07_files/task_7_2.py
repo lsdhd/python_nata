@@ -40,7 +40,7 @@ interface Ethernet0/3
 
 """
 
-
+file = open('ospf.txt', 'r').readlines()
 file = open('config_sw1.txt', 'r').readlines()
 stop =len(file)
 stdout = []

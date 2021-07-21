@@ -17,3 +17,17 @@
 """
 
 ignore = ["duplex", "alias", "configuration"]
+file = open('config_sw1.txt', 'r').readlines()
+stop =len(file)
+stdout = []
+ignore = set(ignore)
+
+for f in range(stop):
+        if str(file[f]).startswith('!'):
+            pass
+        elif ignore.intersection(file[f].split()):
+            pass
+        else:
+            stdout.append(file[f])
+
+print(''.join(stdout))
