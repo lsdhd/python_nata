@@ -16,4 +16,22 @@
 
 """
 
+file = open('config_sw1.txt', 'r').readlines()
+stop =len(file)
+stdout = []
 ignore = ["duplex", "alias", "configuration"]
+ignore = set(ignore)
+
+for f in range(stop):
+        if str(file[f]).startswith('!'):
+            pass
+        elif ignore.intersection(file[f].split()):
+            pass
+        else:
+            stdout.append(file[f])
+
+result = open('result.txt', 'w')
+result.write(''.join(stdout))
+result.close()
+
+
