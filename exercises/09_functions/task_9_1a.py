@@ -29,17 +29,43 @@ print(generate_access_config(access_config, access_mode_template, port_security_
 """
 
 access_mode_template = [
-    "switchport mode access",
-    "switchport access vlan",
-    "switchport nonegotiate",
-    "spanning-tree portfast",
-    "spanning-tree bpduguard enable",
+    "switchport mode access", "switchport access vlan",
+    "switchport nonegotiate", "spanning-tree portfast",
+    "spanning-tree bpduguard enable"
 ]
 
 port_security_template = [
     "switchport port-security maximum 2",
     "switchport port-security violation restrict",
-    "switchport port-security",
+    "switchport port-security"
 ]
 
 access_config = {"FastEthernet0/12": 10, "FastEthernet0/14": 11, "FastEthernet0/16": 17}
+
+def generate_access_config(intf_vlan_mapping, access_template, psecurity=None):
+    result = []
+    for intf, vlan in intf_vlan_mapping.items():  #intf-ключ, vlan-значение в словарях
+        result.append("interface "+ intf)
+        print('interface ' + intf)
+        for command in access_template:
+            if command.endswith("access vlan"):  # если элемент списка кончается на 'access vlan'
+                result.append(str(command) + ' ' + str(vlan))
+                print(f" {command} {vlan}")  # добавляем в элемент номер влана
+            else:
+                result.append(command)
+                print(f" {command}")  # оставляем, как есть
+        #if psecurity None:
+        if psecurity:
+            for commands in psecurity:
+                print(f" {commands}")
+                result.append(commands)
+
+    #print(result)
+
+
+generate_access_config(access_config, access_mode_template, port_security_template)
+print('\n\n\n')
+generate_access_config(access_config, access_mode_template)
+
+
+
