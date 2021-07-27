@@ -60,3 +60,24 @@ trunk_config_2 = {
     "FastEthernet0/15": [111, 130],
     "FastEthernet0/14": [117],
 }
+
+def generate_trunk_template (intf_vlan, trunk_template):
+    result = []
+    for intf, vlan in intf_vlan.items():    #intf-ключ, vlan-значение в словарях
+        result.append("interface "+ intf)
+        #print("interface " + intf)
+        for command in trunk_template:
+            if command.endswith("allowed vlan"): #если элемент списка кончается на 'allowed vlan'
+                vlan2 = []
+                for f in vlan:
+                    f = str(f)
+                    vlan2.append(f)
+                result.append(command + ' ' + ','.join(vlan2))
+                #print(f" {command} {','.join(vlan2)}") #добавляем в элемент номер влана
+            else:
+                result.append(command)
+                #print(f" {command}") #оставляем, как есть
+    print(result)
+generate_trunk_template(trunk_config, trunk_mode_template)
+
+generate_trunk_template(trunk_config_2, trunk_mode_template)
