@@ -23,3 +23,24 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+def get_int_vlan_map (config_filename):
+    openfile = open(config_filename, 'r')
+    access = {}
+    trunk = {}
+    for f in openfile:
+            if str(f).startswith('interface'):
+                interface = f.split(' ')[1].strip()
+            elif 'access vlan' in f:
+                vlan_access = f.split(' ')[-1]
+                access[interface] = vlan_access.strip()
+            elif 'trunk allowed' in f:
+                vlan_trunk = f.split(' ')[-1]
+                trunk[interface] = vlan_trunk.strip()
+    return (access, trunk)
+
+
+print(get_int_vlan_map('config_sw1.txt'))
+
+
+
