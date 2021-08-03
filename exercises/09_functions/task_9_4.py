@@ -45,7 +45,7 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 
-ignore = ["duplex", "alias", "configuration"]
+'''ignore = ["duplex", "alias", "configuration"]
 
 
 def ignore_command(command, ignore):
@@ -63,4 +63,29 @@ def ignore_command(command, ignore):
     for word in ignore:
         if word in command:
             ignore_status = True
-    return ignore_status
+    return ignore_status'''
+
+def convert_config_to_dict(config_filename):
+    openfile = open(config_filename, 'r')
+    ignore = ["duplex", "alias", "configuration"]
+    ignore = set(ignore)
+    stdout = []
+    command = {}
+    for f in openfile:
+        if '!' in str(f):
+            pass
+        elif ignore.intersection(f.split()):
+            pass
+        else:
+            stdout.append(f.strip('\n'))
+    for level2 in stdout:
+        if not level2.startswith(' '):
+            level2.strip()
+            level1 = level2
+            command[level1] = []
+        else:
+            command[level1].append(level2.strip())
+    return command
+
+print(convert_config_to_dict('config_r1.txt'))
+
