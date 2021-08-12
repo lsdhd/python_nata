@@ -28,9 +28,25 @@ Cгенерировать топологию, которая соответст�
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+def create_network_map(filenames):
+    cdp = {}
+    for s in filenames:
+        with open(s) as f:
+            for line in f:
+                line = line.strip()
+                info = line.split()
+                if ">" in line:
+                    hostname = line.split(">")[0]
+                elif len(info)  and info[3].isdigit():
+                    ID, local_int, local_int_num, *other, rem_int, rem_int_num = info
+                    cdp[(hostname, local_int + local_int_num)] = (ID, rem_int + rem_int_num)
+    return cdp
+
 infiles = [
     "sh_cdp_n_sw1.txt",
     "sh_cdp_n_r1.txt",
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+if __name__ == "__main__":
+    print(create_network_map(infiles))
